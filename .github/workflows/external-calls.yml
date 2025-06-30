@@ -3,12 +3,15 @@ name: External API Calls
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   call-apis:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: step-security/harden-runner@v2
+      - uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
         with:
           egress-policy: audit
 
@@ -20,7 +23,7 @@ jobs:
           cd /home/agent && sudo ./ecapture daemon --event-limit=50&
 
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Perform GET Request
         run: |
